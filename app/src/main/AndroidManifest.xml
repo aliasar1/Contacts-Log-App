@@ -12,6 +12,9 @@
         android:theme="@style/Theme.ContactsLogApp"
         tools:targetApi="31">
         <activity
+            android:name=".ContactListActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddContactActivity"
             android:exported="false" />
         <activity

@@ -16,7 +16,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.view_all_btn).setOnClickListener{
-
+            val intent = Intent(this, ContactListActivity::class.java)
+            startActivity(intent)
         }
     }
 }
