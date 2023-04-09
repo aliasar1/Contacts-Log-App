@@ -11,8 +11,7 @@ import com.example.contactslogapp.models.Contact
 class ContactAdapter(var contactList: MutableList<Contact>):RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
     class ContactViewHolder(view: View): RecyclerView.ViewHolder(view){
-        val txFname = view.findViewById<TextView>(R.id.txFName)
-        val txLname = view.findViewById<TextView>(R.id.txLName)
+        val txName = view.findViewById<TextView>(R.id.txName)
         val txEmail = view.findViewById<TextView>(R.id.txEmail)
         val txPhone = view.findViewById<TextView>(R.id.txPhone)
     }
@@ -28,8 +27,7 @@ class ContactAdapter(var contactList: MutableList<Contact>):RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val contact = contactList[position]
-        holder.txFname.text = contact.firstName
-        holder.txLname.text = contact.lastName
+        holder.txName.text = "${contact.firstName} ${contact.lastName}"
         holder.txEmail.text = contact.email
         holder.txPhone.text = contact.phone
     }

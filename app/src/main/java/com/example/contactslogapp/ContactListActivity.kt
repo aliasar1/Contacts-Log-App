@@ -7,6 +7,7 @@ import com.example.contactslogapp.adapter.ContactAdapter
 import com.example.contactslogapp.models.Contact
 
 class ContactListActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts_list)
