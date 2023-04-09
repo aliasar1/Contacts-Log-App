@@ -31,4 +31,8 @@ class ContactAdapter(var contactList: MutableList<Contact>):RecyclerView.Adapter
         holder.txEmail.text = contact.email
         holder.txPhone.text = contact.phone
     }
+
+    fun getItem(position: Int): Contact {
+        return contactList[position]
+    }
 }

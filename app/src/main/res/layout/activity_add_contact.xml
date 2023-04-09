@@ -82,7 +82,7 @@
             android:paddingHorizontal="8dp"
             android:layout_marginBottom="10dp"
             android:id="@+id/lName_txt"
-            android:hint="Enter your first name"
+            android:hint="Enter last name"
             android:inputType="textPersonName"
             android:background="@drawable/field_background_rectangle" />
 
@@ -105,8 +105,8 @@
             android:layout_marginHorizontal="20dp"
             android:paddingHorizontal="8dp"
             android:layout_marginBottom="10dp"
-            android:id="@+id/email_field"
-            android:hint="Enter your email"
+            android:id="@+id/email_txt"
+            android:hint="Enter email address"
             android:inputType="textEmailAddress"
             android:background="@drawable/field_background_rectangle"
             android:text="" />
@@ -116,7 +116,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:text="First Name"
+            android:text="Phone Number"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="5dp"
             android:textColor="@color/teal_700"

@@ -1,9 +1,8 @@
-package com.example.contactslogapp
-
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.example.contactslogapp.R
 
 class SplashActivity : AppCompatActivity() {
     private val handler = Handler()
