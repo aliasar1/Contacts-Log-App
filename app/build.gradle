@@ -7,6 +7,11 @@ android {
     namespace 'com.example.contactslogapp'
     compileSdk 33
 
+    buildFeatures {
+        viewBinding true
+    }
+
+
     defaultConfig {
         applicationId "com.example.contactslogapp"
         minSdk 23
