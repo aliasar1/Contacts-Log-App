@@ -1,7 +1,9 @@
+package com.example.contactslogapp
+
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
 import com.example.contactslogapp.R
 
 class SplashActivity : AppCompatActivity() {
@@ -18,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             }
         }
-        handler.postDelayed(runnable, 3000)
+        handler.postDelayed(runnable, 5000)
     }
 
     override fun onDestroy() {
