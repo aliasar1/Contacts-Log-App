@@ -9,6 +9,7 @@ import com.example.contactslogapp.models.Contact
 import com.example.contactslogapp.utils.AppPreferences
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
+import java.util.*
 
 class AddContactActivity : AppCompatActivity() {
     private lateinit var preferences: AppPreferences
@@ -54,12 +55,10 @@ class AddContactActivity : AppCompatActivity() {
                     showMsg("Phone number can have numeric digits only.")
                 }
                 else{
-                    preferences.clearAllData()
-                    val key = preferences.getLength()
-                    val contact = Contact(fName, lName, email, phone)
-
+                    val id = UUID.randomUUID().toString()
+                    val contact = Contact(id, fName, lName, email, phone)
                     val gsonContact = gson.toJson(contact, Contact::class.java)
-                    preferences.setData(key.toString(), gsonContact)
+                    preferences.setData(id, gsonContact)
                     showMsg("New Contact added successfully.")
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
