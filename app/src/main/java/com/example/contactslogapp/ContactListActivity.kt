@@ -1,7 +1,10 @@
 package com.example.contactslogapp
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +16,7 @@ import com.example.contactslogapp.utils.AppPreferences
 import com.google.gson.Gson
 
 class ContactListActivity : AppCompatActivity() {
+    private lateinit var contactAdapter: ContactAdapter
     private lateinit var preferences: AppPreferences
     private val gson = Gson()
 
@@ -20,38 +24,43 @@ class ContactListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts_list)
 
-        // Set up RecyclerView with LinearLayoutManager
-        val rvContacts = findViewById<RecyclerView>(R.id.rvContacts)
-        val layoutManager = LinearLayoutManager(this)
-        rvContacts.layoutManager = layoutManager
-
-        // Inflate activity_contact_item layout
-        val inflater = layoutInflater
-        val itemView = inflater.inflate(R.layout.activity_contact_item, null, false)
-
         preferences = AppPreferences(this)
 
-        val rvContacts1 = findViewById<RecyclerView>(R.id.rvContacts)
-        rvContacts1.adapter = ContactAdapter(getContacts())
+        val rvContacts = findViewById<RecyclerView>(R.id.rvContacts)
+        contactAdapter = ContactAdapter(getContacts())
+        rvContacts.adapter = contactAdapter
 
         rvContacts.addOnItemClickListener { position ->
-            val clickedContact = (rvContacts1.adapter as ContactAdapter).getItem(position)
+            val clickedContact = contactAdapter.getItem(position)
             showContactDetailsDialog(clickedContact)
         }
 
-        val ivDel = itemView.findViewById<ImageView>(R.id.ivDelete)
-        val txEdit = itemView.findViewById<TextView>(R.id.ivEdit)
-
-        ivDel.setOnClickListener { view ->
-            val position = rvContacts.getChildAdapterPosition(view)
-            val clickedContact = (rvContacts.adapter as ContactAdapter).getItem(position)
-            deleteContact(clickedContact)
+        contactAdapter.setOnDeleteClickListener { contact ->
+            onDeleteClick(contact)
         }
+
+        contactAdapter.setOnEditClickListener { contact ->
+        }
+    }
+
+    private fun onDeleteClick(contact: Contact) {
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle("Delete Contact")
+        alertDialog.setMessage("Are you sure you want to delete this contact?")
+        alertDialog.setPositiveButton("Yes") { dialog, which ->
+            deleteContact(contact)
+        }
+        alertDialog.setNegativeButton("No") { dialog, which ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
     }
 
     private fun deleteContact(contact: Contact) {
         val contactKey = contact.id
         preferences.deleteContact(contactKey)
+        contactAdapter.removeItem(contact)
+        contactAdapter.notifyDataSetChanged()
     }
 
     private fun getContacts(): MutableList<Contact> {
@@ -85,13 +94,13 @@ class ContactListActivity : AppCompatActivity() {
 
     private fun RecyclerView.addOnItemClickListener(onClickListener: (Int) -> Unit) {
         this.addOnChildAttachStateChangeListener(object : RecyclerView.OnChildAttachStateChangeListener {
-            override fun onChildViewAttachedToWindow(view: android.view.View) {
+            override fun onChildViewAttachedToWindow(view: View) {
                 view.setOnClickListener {
                     val holder = getChildViewHolder(view)
                     onClickListener.invoke(holder.adapterPosition)
                 }
             }
-            override fun onChildViewDetachedFromWindow(view: android.view.View) {
+            override fun onChildViewDetachedFromWindow(view: View) {
                 view.setOnClickListener(null)
             }
         })

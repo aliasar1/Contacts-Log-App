@@ -3,6 +3,7 @@ package com.example.contactslogapp.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactslogapp.R
@@ -10,10 +11,33 @@ import com.example.contactslogapp.models.Contact
 
 class ContactAdapter(var contactList: MutableList<Contact>):RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
-    class ContactViewHolder(view: View): RecyclerView.ViewHolder(view){
+    private var onDeleteClickListener: ((Contact) -> Unit)? = null
+    private var onEditClickListener: ((Contact) -> Unit)? = null
+
+    inner class ContactViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val txName = view.findViewById<TextView>(R.id.txName)
         val txEmail = view.findViewById<TextView>(R.id.txEmail)
         val txPhone = view.findViewById<TextView>(R.id.txPhone)
+        val ivDelete = view.findViewById<ImageView>(R.id.ivDelete) // Define ivDelete ImageView
+        val ivEdit = view.findViewById<ImageView>(R.id.ivEdit) // Define ivEdit ImageView
+
+        init {
+            ivDelete.setOnClickListener {
+                onDeleteClickListener?.invoke(contactList[adapterPosition])
+            }
+
+            ivEdit.setOnClickListener {
+                onEditClickListener?.invoke(contactList[adapterPosition])
+            }
+        }
+    }
+
+    fun removeItem(contact: Contact) {
+        val position = contactList.indexOf(contact)
+        if (position != -1) {
+            contactList.removeAt(position)
+            notifyItemRemoved(position)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
@@ -30,9 +54,26 @@ class ContactAdapter(var contactList: MutableList<Contact>):RecyclerView.Adapter
         holder.txName.text = "${contact.firstName} ${contact.lastName}"
         holder.txEmail.text = contact.email
         holder.txPhone.text = contact.phone
+
+        holder.ivDelete.setOnClickListener {
+            onDeleteClickListener?.invoke(contact)
+        }
+
+        holder.ivEdit.setOnClickListener {
+            onEditClickListener?.invoke(contact)
+        }
     }
 
     fun getItem(position: Int): Contact {
         return contactList[position]
     }
+
+    fun setOnDeleteClickListener(listener: (Contact) -> Unit) {
+        onDeleteClickListener = listener
+    }
+
+    fun setOnEditClickListener(listener: (Contact) -> Unit) {
+        onEditClickListener = listener
+    }
 }
+

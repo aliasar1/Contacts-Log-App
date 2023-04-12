@@ -5,6 +5,7 @@
     tools:context=".ContactListActivity"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:id="@+id/activity_list"
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
