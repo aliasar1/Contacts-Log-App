@@ -35,6 +35,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        updateCountView()
+    }
+
     private fun updateCountView() {
         val totalContacts = preferences.getLength()
         countView.text = totalContacts.toString()
