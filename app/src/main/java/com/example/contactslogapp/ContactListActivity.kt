@@ -2,17 +2,16 @@ package com.example.contactslogapp
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactslogapp.adapter.ContactAdapter
 import com.example.contactslogapp.models.Contact
 import com.example.contactslogapp.utils.AppPreferences
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 
 class ContactListActivity : AppCompatActivity() {
@@ -40,18 +39,78 @@ class ContactListActivity : AppCompatActivity() {
         }
 
         contactAdapter.setOnEditClickListener { contact ->
+            showEditContactDialog(contact)
         }
     }
+
+    private fun showEditContactDialog(contact: Contact) {
+        setContentView(R.layout.activity_add_contact)
+
+        val fName: EditText = findViewById(R.id.fName_txt)
+        val lName: EditText = findViewById(R.id.lName_txt)
+        val email: EditText = findViewById(R.id.email_txt)
+        val phone: EditText = findViewById(R.id.phone_txt)
+        val btnSave: Button = findViewById(R.id.add_btn)
+        val btnCancel : Button = findViewById(R.id.cancel_btn)
+        val layoutType : TextView = findViewById(R.id.layout_name_txt)
+
+        layoutType.text = "Edit Contact"
+        btnSave.text = "EDIT"
+
+        fName.setText(contact.firstName)
+        lName.setText(contact.lastName)
+        email.setText(contact.email)
+        phone.setText(contact.phone)
+
+        btnSave.setOnClickListener {
+            val updatedFirstName = fName.text.toString().trim()
+            val updatedLastName = lName.text.toString().trim()
+            val updatedEmail = email.text.toString().trim()
+            val updatedPhone = phone.text.toString().trim()
+
+            if (updatedFirstName.isNotEmpty() && updatedLastName.isNotEmpty() && updatedEmail.isNotEmpty() && updatedPhone.isNotEmpty()) {
+                contact.firstName = updatedFirstName
+                contact.lastName = updatedLastName
+                contact.email = updatedEmail
+                contact.phone = updatedPhone
+                updateContact(contact)
+                showMsg("Contact edited successfully!")
+                val intent = Intent(this, ContactListActivity::class.java)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        btnCancel.setOnClickListener {
+            val intent = Intent(this, ContactListActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun showMsg(msg: String) {
+        val snackbar = Snackbar.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT)
+        snackbar.setBackgroundTint(resources.getColor(R.color.white))
+        snackbar.setTextColor(resources.getColor(R.color.teal_700))
+        snackbar.show()
+    }
+
+    private fun updateContact(contact: Contact) {
+        preferences.saveUpdatedData(contact.id, gson.toJson(contact))
+        contactAdapter.notifyDataSetChanged()
+    }
+
 
     private fun onDeleteClick(contact: Contact) {
         val alertDialog = AlertDialog.Builder(this)
         alertDialog.setTitle("Delete Contact")
+
         alertDialog.setMessage("Are you sure you want to delete this contact?")
-        alertDialog.setPositiveButton("Yes") { dialog, which ->
+        alertDialog.setPositiveButton("Yes") { _, _ ->
             deleteContact(contact)
         }
-        alertDialog.setNegativeButton("No") { dialog, which ->
-            dialog.dismiss()
+        alertDialog.setNegativeButton("No") { dialogInterface, _ ->
+            dialogInterface.dismiss()
         }
         alertDialog.show()
     }

@@ -2,7 +2,6 @@ package com.example.contactslogapp.utils
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import com.example.contactslogapp.models.Contact
 
 class AppPreferences (var context: Context){
     private val preferences = context.getSharedPreferences("app_pref",MODE_PRIVATE)
@@ -29,6 +28,10 @@ class AppPreferences (var context: Context){
 
     fun getKey(index: Int): String {
         return preferences.all.keys.elementAt(index)
+    }
+
+    fun saveUpdatedData(key: String, contact: String) {
+        preferences.edit().putString(key, contact).apply()
     }
 
 }

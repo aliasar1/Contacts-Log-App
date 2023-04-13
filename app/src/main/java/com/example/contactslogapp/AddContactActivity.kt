@@ -23,6 +23,11 @@ class AddContactActivity : AppCompatActivity() {
         findViewById<Button>(R.id.add_btn).setOnClickListener {
             addContact()
         }
+
+        findViewById<Button>(R.id.cancel_btn).setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun addContact(){
