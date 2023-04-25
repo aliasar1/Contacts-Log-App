@@ -17,49 +17,28 @@
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/ivProduct"
+            android:id="@+id/ivPhone"
             android:layout_gravity="center_vertical"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/person"/>
+            android:src="@drawable/phone"/>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/txName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:textColor="@color/teal_700"
-                android:textStyle="bold"
-                android:textSize="18dp"/>
-
-            <TextView
-                android:id="@+id/txEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:textColor="@color/black"
-                android:textSize="14dp"/>
-
-            <TextView
-                android:id="@+id/txPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="03312311239"
-                android:textColor="@color/black"
-                android:textSize="14dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
+        <TextView
+            android:id="@+id/txName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Name"
+            android:layout_marginStart="12dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/teal_700"
+            android:textStyle="bold"
+            android:textSize="21dp"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="end">
 
             <ImageView
@@ -69,19 +48,21 @@
                 android:src="@drawable/editing"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_gravity="center"
-                android:layout_marginVertical="7dp"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="5dp"
                 android:contentDescription="Edit" />
 
             <ImageView
                 android:id="@+id/ivDelete"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
                 android:src="@drawable/delete"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_gravity="center"
+                android:layout_gravity="center|end"
+                android:layout_marginTop="5dp"
                 android:contentDescription="Delete" />
 
         </LinearLayout>

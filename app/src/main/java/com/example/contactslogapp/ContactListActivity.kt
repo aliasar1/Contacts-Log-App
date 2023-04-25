@@ -3,6 +3,7 @@ package com.example.contactslogapp
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -40,6 +41,10 @@ class ContactListActivity : AppCompatActivity() {
 
         contactAdapter.setOnEditClickListener { contact ->
             showEditContactDialog(contact)
+        }
+
+        contactAdapter.setOnCallClickListener { contact ->
+            callPerson(contact.phone)
         }
     }
 
@@ -133,6 +138,12 @@ class ContactListActivity : AppCompatActivity() {
             contacts.add(contact)
         }
         return contacts
+    }
+
+    private fun callPerson(phone: String){
+        val intent = Intent(Intent.ACTION_DIAL);
+        intent.data = Uri.parse("tel:${phone}");
+        startActivity(intent);
     }
 
     private fun showContactDetailsDialog(contact: Contact) {

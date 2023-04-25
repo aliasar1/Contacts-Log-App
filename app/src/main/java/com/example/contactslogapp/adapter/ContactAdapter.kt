@@ -13,13 +13,13 @@ class ContactAdapter(var contactList: MutableList<Contact>):RecyclerView.Adapter
 
     private var onDeleteClickListener: ((Contact) -> Unit)? = null
     private var onEditClickListener: ((Contact) -> Unit)? = null
+    private var onCallClickListener: ((Contact) -> Unit)? = null
 
     inner class ContactViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val txName = view.findViewById<TextView>(R.id.txName)
-        val txEmail = view.findViewById<TextView>(R.id.txEmail)
-        val txPhone = view.findViewById<TextView>(R.id.txPhone)
-        val ivDelete = view.findViewById<ImageView>(R.id.ivDelete) // Define ivDelete ImageView
-        val ivEdit = view.findViewById<ImageView>(R.id.ivEdit) // Define ivEdit ImageView
+        val ivDelete = view.findViewById<ImageView>(R.id.ivDelete)
+        val ivEdit = view.findViewById<ImageView>(R.id.ivEdit)
+        val ivPhone = view.findViewById<ImageView>(R.id.ivPhone)
 
         init {
             ivDelete.setOnClickListener {
@@ -28,6 +28,10 @@ class ContactAdapter(var contactList: MutableList<Contact>):RecyclerView.Adapter
 
             ivEdit.setOnClickListener {
                 onEditClickListener?.invoke(contactList[adapterPosition])
+            }
+
+            ivPhone.setOnClickListener {
+                onCallClickListener?.invoke(contactList[adapterPosition])
             }
         }
     }
@@ -52,8 +56,6 @@ class ContactAdapter(var contactList: MutableList<Contact>):RecyclerView.Adapter
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val contact = contactList[position]
         holder.txName.text = "${contact.firstName} ${contact.lastName}"
-        holder.txEmail.text = contact.email
-        holder.txPhone.text = contact.phone
 
         holder.ivDelete.setOnClickListener {
             onDeleteClickListener?.invoke(contact)
@@ -61,6 +63,10 @@ class ContactAdapter(var contactList: MutableList<Contact>):RecyclerView.Adapter
 
         holder.ivEdit.setOnClickListener {
             onEditClickListener?.invoke(contact)
+        }
+
+        holder.ivPhone.setOnClickListener {
+            onCallClickListener?.invoke(contact)
         }
     }
 
@@ -74,6 +80,10 @@ class ContactAdapter(var contactList: MutableList<Contact>):RecyclerView.Adapter
 
     fun setOnEditClickListener(listener: (Contact) -> Unit) {
         onEditClickListener = listener
+    }
+
+    fun setOnCallClickListener(listener: (Contact) -> Unit) {
+        onCallClickListener = listener
     }
 }
 
