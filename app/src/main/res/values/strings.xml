@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Contacts Verse</string>
+    <string name="total_contacts">Total Contacts</string>
+    <string name="initial_count">0</string>
+    <string name="add_contact">Add Contact</string>
+    <string name="view_contacts">View Contacts</string>
+    <string name="first_name">First Name</string>
+    <string name="enter_first_name">Enter first name</string>
+    <string name="last_name">Last Name</string>
+    <string name="enter_last_name">Enter last name</string>
+    <string name="email">Email</string>
+    <string name="enter_email_address">Enter email address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="enter_phone_number">Enter phone number</string>
+    <string name="cancel">CANCEL</string>
+    <string name="add">ADD</string>
+    <string name="name">Name</string>
+    <string name="splash_icon">SplashIcon</string>
+    <string name="call">Call</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="user_icon">User Icon</string>
+    <string name="phone">Phone</string>
 </resources>

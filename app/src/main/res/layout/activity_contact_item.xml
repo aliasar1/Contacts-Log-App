@@ -21,18 +21,19 @@
             android:layout_gravity="center_vertical"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/phone"/>
+            android:src="@drawable/phone"
+            android:contentDescription="@string/call" />
 
         <TextView
             android:id="@+id/txName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="@string/name"
             android:layout_marginStart="12dp"
             android:layout_gravity="center_vertical"
             android:textColor="@color/teal_700"
             android:textStyle="bold"
-            android:textSize="21dp"/>
+            android:textSize="21sp"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -51,7 +52,7 @@
                 android:layout_gravity="center|end"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="5dp"
-                android:contentDescription="Edit" />
+                android:contentDescription="@string/edit" />
 
             <ImageView
                 android:id="@+id/ivDelete"
@@ -63,7 +64,7 @@
                 android:focusable="true"
                 android:layout_gravity="center|end"
                 android:layout_marginTop="5dp"
-                android:contentDescription="Delete" />
+                android:contentDescription="@string/delete" />
 
         </LinearLayout>
 

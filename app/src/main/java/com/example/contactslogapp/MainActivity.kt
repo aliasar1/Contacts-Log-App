@@ -5,9 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import com.example.contactslogapp.AddContactActivity
-import com.example.contactslogapp.ContactListActivity
-import com.example.contactslogapp.R
 import com.example.contactslogapp.utils.AppPreferences
 
 class MainActivity : AppCompatActivity() {
