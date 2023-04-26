@@ -30,6 +30,11 @@ class ContactListActivity : AppCompatActivity() {
         contactAdapter = ContactAdapter(getContacts())
         rvContacts.adapter = contactAdapter
 
+        if (getContacts().isEmpty()) {
+            val noContactsText = findViewById<TextView>(R.id.no_contacts)
+            noContactsText.visibility = View.VISIBLE
+        }
+
         rvContacts.addOnItemClickListener { position ->
             val clickedContact = contactAdapter.getItem(position)
             showContactDetailsDialog(clickedContact)
