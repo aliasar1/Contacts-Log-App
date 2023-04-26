@@ -26,8 +26,17 @@ class AddContactActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.cancel_btn).setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
+            finish()
         }
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
     }
 
     private fun addContact(){
@@ -66,7 +75,9 @@ class AddContactActivity : AppCompatActivity() {
                     preferences.setData(id, gsonContact)
                     showMsg("New Contact added successfully.")
                     val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
+                    finish()
                 }
             }
         }

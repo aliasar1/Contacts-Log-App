@@ -82,6 +82,7 @@ class ContactListActivity : AppCompatActivity() {
                 showMsg("Contact edited successfully!")
                 val intent = Intent(this, ContactListActivity::class.java)
                 startActivity(intent)
+                finish()
             } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
@@ -89,8 +90,18 @@ class ContactListActivity : AppCompatActivity() {
 
         btnCancel.setOnClickListener {
             val intent = Intent(this, ContactListActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
+            finish()
         }
+
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
     }
 
     private fun showMsg(msg: String) {
