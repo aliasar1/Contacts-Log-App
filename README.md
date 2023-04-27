@@ -10,6 +10,7 @@ This mobile application is built using Kotlin. The application is developed to s
 4. Update Contact
 5. View total number of contacts
 6. State persistence
+7. Display contact information
 
 ## Screeshots
 ### Splash Screen
@@ -29,3 +30,9 @@ This mobile application is built using Kotlin. The application is developed to s
 
 ### Delete Contact
 ![image](https://user-images.githubusercontent.com/74453775/234934296-94de8b86-55a4-42ed-a9f4-343ea64c50db.png)
+
+### Display Contact Information
+![image](https://user-images.githubusercontent.com/74453775/234937332-4b639c08-e861-475e-aa19-cfd2fbbd88c6.png)
+
+### Call Screen after clicking on Call Icon
+![image](https://user-images.githubusercontent.com/74453775/234937145-85382562-3672-4830-b89b-0851b59b0498.png)
